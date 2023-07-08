@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,13 +13,28 @@ public class MainManager : MonoBehaviour
 
     public Text ScoreText;
     public GameObject GameOverText;
-    
+
     private bool m_Started = false;
     private int m_Points;
     
     private bool m_GameOver = false;
 
-    
+    public static MainManager Instance;
+    public int highScore;
+    public string highScoreHolder;
+
+
+    private void Awake()
+    {
+        if(Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,5 +88,35 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+    }
+
+    // ============= SAVE DATA ================
+
+    [System.Serializable]
+    class SaveData
+    {
+        public int highScore;
+        public string highScoreHolder;
+    }
+
+    public void SaveGame()
+    {
+        SaveData data = new SaveData();
+        data.highScore = highScore;
+        data.highScoreHolder = highScoreHolder;
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText("D:\\Documents\\Unity\\Unity Projects\\Learning\\Junior Programmer Path\\Data-Persistence-Project\\SaveData\\savedata.json", json);
+    }
+
+    public void LoadGame()
+    {
+        string path = "D:\\Documents\\Unity\\Unity Projects\\Learning\\Junior Programmer Path\\Data-Persistence-Project\\SaveData\\savedata.json";
+        if(File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            SaveData data = JsonUtility.FromJson<SaveData>(json);
+            highScore = data.highScore;
+            highScoreHolder = data.highScoreHolder;
+        }
     }
 }
