@@ -15,7 +15,7 @@ public class MainManager : MonoBehaviour
     public GameObject GameOverText;
 
     private bool m_Started = false;
-    private int m_Points;
+    private int score;
     
     private bool m_GameOver = false;
 
@@ -71,6 +71,11 @@ public class MainManager : MonoBehaviour
         }
         else if (m_GameOver)
         {
+            if ( score > MainManager.Instance.highScore)
+            {
+                MainManager.Instance.highScore = score;
+                SceneManager.LoadScene(2);
+            }
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -80,8 +85,8 @@ public class MainManager : MonoBehaviour
 
     void AddPoint(int point)
     {
-        m_Points += point;
-        ScoreText.text = $"Score : {m_Points}";
+        score += point;
+        ScoreText.text = $"Score : {score}";
     }
 
     public void GameOver()
