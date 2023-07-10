@@ -17,8 +17,8 @@ public class MenuHandler : MonoBehaviour
 
     public void ExitGame()
     {
-        if (MainManager.Instance != null)
-            MainManager.Instance.SaveGame();
+        if (DataCenter.Instance != null)
+            DataCenter.Instance.SaveGame();
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
 #else
