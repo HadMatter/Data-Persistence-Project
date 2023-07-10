@@ -10,27 +10,6 @@ using UnityEditor; // There is no UnityEditor when running standalone
 public class MenuHandler : MonoBehaviour
 {
 
-
-
-    public void Awake()
-    {
-        string savePath = "D:\\Documents\\Unity\\Unity Projects\\Learning\\Junior Programmer Path\\Data-Persistence-Project\\SaveData\\savedata.json";
-        if (File.Exists(savePath))
-            MainManager.Instance.LoadGame();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void StartGame()
     {
         SceneManager.LoadScene(1);
@@ -38,7 +17,8 @@ public class MenuHandler : MonoBehaviour
 
     public void ExitGame()
     {
-        MainManager.Instance.SaveGame();
+        if (MainManager.Instance != null)
+            MainManager.Instance.SaveGame();
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
 #else
