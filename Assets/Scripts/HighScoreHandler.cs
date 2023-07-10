@@ -14,7 +14,7 @@ public class HighScoreHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        highScoreText.text = MainManager.Instance.highScore;
+        highScoreText.text = MainManager.Instance.highScore.ToString();
     }
 
     // Update is called once per frame
