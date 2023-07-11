@@ -19,21 +19,6 @@ public class MainManager : MonoBehaviour
     
     private bool m_GameOver = false;
 
-    //public static MainManager Instance;
-    //public int highScore;
-    //public string highScoreHolder;
-
-
-    //private void Awake()
-    //{
-    //    if(MainManager.Instance != null)
-    //    {
-    //        Destroy(gameObject);
-    //        return;
-    //    }
-    //    Instance = this;
-    //    DontDestroyOnLoad(gameObject);
-    //}
 
     // Start is called before the first frame update
     void Start()

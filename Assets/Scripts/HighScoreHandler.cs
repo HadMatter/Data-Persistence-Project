@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
+using TMPro; // for TextMeshPro text box
+using UnityEngine.UI; // for InputField box
 
 public class HighScoreHandler : MonoBehaviour
 {
     public TextMeshProUGUI highScoreText;
-    // need to look up how to work with UI Input element
+    public Text highScoreHandlerInput;
     public int score;
+    public string highScoreName;
 
 
     // Start is called before the first frame update
@@ -20,11 +22,12 @@ public class HighScoreHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        DataCenter.Instance.highScoreHolder = highScoreHandlerInput.text;
     }
 
     public void ReturnToMenu()
     {
+        DataCenter.Instance.SaveGame();
         SceneManager.LoadScene(0);
     }
 }
