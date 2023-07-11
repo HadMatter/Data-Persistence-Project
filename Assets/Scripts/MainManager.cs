@@ -74,7 +74,6 @@ public class MainManager : MonoBehaviour
         // step, at 0.6, sets the spacing with 0.05 b/w each brick
         const float step = 0.6f; 
         int perLine = Mathf.FloorToInt(4.0f / step);
-        Debug.Log("perLine = " + perLine);
 
         int[] pointCountArray = new[] { 1, 1, 2, 2, 5, 5 };
         for (int i = 0; i < LineCount; ++i)
