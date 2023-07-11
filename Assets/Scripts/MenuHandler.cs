@@ -12,6 +12,7 @@ public class MenuHandler : MonoBehaviour
 
     public void StartGame()
     {
+        DataCenter.Instance.currentScore = 0;
         SceneManager.LoadScene(1);
     }
 

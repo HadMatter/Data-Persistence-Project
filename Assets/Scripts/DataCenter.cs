@@ -8,6 +8,7 @@ public class DataCenter : MonoBehaviour
     public static DataCenter Instance;
     public int highScore;
     public string highScoreHolder;
+    public int currentScore;
 
 
     private void Awake()

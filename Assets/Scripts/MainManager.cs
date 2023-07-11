@@ -15,7 +15,7 @@ public class MainManager : MonoBehaviour
     public GameObject GameOverText;
 
     private bool m_Started = false;
-    private int score;
+    //private static int score;
     
     private bool m_GameOver = false;
 
@@ -26,6 +26,7 @@ public class MainManager : MonoBehaviour
     {
         SetTheBoard();
         DataCenter.Instance.LoadGame();
+        ScoreText.text = $"Score : {DataCenter.Instance.currentScore}"; //???????????????
         highScoreText.text = "Best Score : " + DataCenter.Instance.highScoreHolder + " : " + DataCenter.Instance.highScore;
     }
 
@@ -47,21 +48,23 @@ public class MainManager : MonoBehaviour
         
         if (m_GameOver)
         {
-            if (score > DataCenter.Instance.highScore)
+            if (DataCenter.Instance.currentScore > DataCenter.Instance.highScore)
             {
-                DataCenter.Instance.highScore = score;
+                DataCenter.Instance.highScore = DataCenter.Instance.currentScore;
                 DataCenter.Instance.SaveGame();
                 SceneManager.LoadScene(2);
-            }
+            }            
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                DataCenter.Instance.currentScore = 0;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }
 
         // Keep the game going if you clear all the bricks
-        if (brickCount <= 0 )
-            SetTheBoard();
+        if (brickCount <= 0)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            
     }
 
     private void SetTheBoard()
@@ -89,8 +92,8 @@ public class MainManager : MonoBehaviour
 
     void AddPoint(int point)
     {
-        score += point;
-        ScoreText.text = $"Score : {score}"; //???????????????
+        DataCenter.Instance.currentScore += point;
+        ScoreText.text = $"Score : {DataCenter.Instance.currentScore}"; //???????????????
         --brickCount;
     }
 
